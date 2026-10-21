@@ -1,0 +1,61 @@
+[
+  {
+    "id": "jb-hifi-new",
+    "retailer": "JB Hi-Fi",
+    "name": "PS5 PlayStation 5 Pro Console",
+    "condition": "new",
+    "url": "https://www.jbhifi.com.au/products/ps5-playstation-5-pro-console",
+    "note": "Online availability; verify Cairns pickup at checkout."
+  },
+  {
+    "id": "sony-new",
+    "retailer": "Sony Store Australia",
+    "name": "PlayStation 5 Pro Console",
+    "condition": "new",
+    "url": "https://store.sony.com.au/playstation-5-console/PLAYSTATION5PRO.html",
+    "note": "Sony Australia direct delivery; rural delivery eligibility varies."
+  },
+  {
+    "id": "bigw-new",
+    "retailer": "BIG W",
+    "name": "PlayStation 5 Pro Console",
+    "condition": "new",
+    "url": "https://www.bigw.com.au/product/playstation-5-pro-console/p/104141",
+    "note": "Official BIG W product, not a third-party marketplace listing. Pre-orders are shown separately."
+  },
+  {
+    "id": "target-new",
+    "retailer": "Target Australia",
+    "name": "PlayStation 5 Pro Console",
+    "condition": "new",
+    "url": "https://www.target.com.au/p/playstation-5-pro-console/71080888",
+    "note": "Online-only listing; verify shipping to Cairns before purchasing."
+  },
+  {
+    "id": "harvey-new",
+    "retailer": "Harvey Norman",
+    "name": "PS5 PlayStation 5 Pro Console",
+    "condition": "new",
+    "url": "https://www.harveynorman.com.au/ps5-playstation-5-pro-console.html",
+    "mode": "listing",
+    "match": "PS5 PlayStation 5 Pro Console",
+    "note": "Category-page stock signal; direct link opens the PS5 Pro product page.",
+    "check_url": "https://www.harveynorman.com.au/games-hub/game-consoles/playstation-consoles"
+  },
+  {
+    "id": "eb-refurb-digital",
+    "retailer": "EB Games",
+    "name": "PS5 Pro Digital — refurbished by EB Games",
+    "condition": "refurbished",
+    "url": "https://www.ebgames.com.au/product/ps5/325647-playstation-5-pro-digital-console-refurbished-by-eb-games-preowned",
+    "note": "EB calls this 'preowned', but specifically confirms it is professionally refurbished. Availability may depend on postcode."
+  },
+  {
+    "id": "eb-refurb-disc",
+    "retailer": "EB Games",
+    "name": "PS5 Pro with disc drive — refurbished by EB Games",
+    "condition": "refurbished",
+    "url": "https://www.ebgames.com.au/product/ps5/325648-playstation-5-pro-disc-console-refurbished-by-eb-games-preowned",
+    "note": "Professionally refurbished by EB Games; not an unrefurbished used console."
+  }
+]
