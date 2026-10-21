@@ -1,0 +1,77 @@
+name: Check Australian PS5 Pro stock
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+    inputs:
+      test_notification:
+        description: 'Send a test alert instead of checking retailers'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: ps5-pro-stock-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Check retailers or send test alert
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          NOTIFY_PREORDERS: ${{ vars.NOTIFY_PREORDERS }}
+          TEST_NOTIFICATION: ${{ inputs.test_notification }}
+        run: |
+          if [ "$TEST_NOTIFICATION" = "true" ]; then
+            python monitor.py --test-notification
+          else
+            python monitor.py
+          fi
+      - name: Save updated dashboard data
+        if: ${{ inputs.test_notification != true }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/stock.json
+          if git diff --cached --quiet; then
+            echo "No dashboard changes"
+          else
+            git commit -m 'Update PS5 Pro stock report [skip ci]'
+            git push
+          fi
+      - name: Configure GitHub Pages
+        if: ${{ inputs.test_notification != true }}
+        uses: actions/configure-pages@v5
+      - name: Upload dashboard
+        if: ${{ inputs.test_notification != true }}
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+      - name: Publish dashboard
+        if: ${{ inputs.test_notification != true }}
+        id: deployment
+        uses: actions/deploy-pages@v4
